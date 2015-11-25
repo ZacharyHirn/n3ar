@@ -562,7 +562,8 @@ int process_video_stream(char avifile[])
 /*
 	
 */
-
+/* ZACHARY: It appears that how the program begins is that it's told to either turn a video, picture,
+video, or live feed into ASCII text. */
 int main(int argc, char* argv[])
 {
 	// packed rendering structures
@@ -573,7 +574,7 @@ int main(int argc, char* argv[])
 
 	//
 	unpack_rendering_structures(glyphs, &glyphnum, &glyphnrows, &glyphncols, &tree, pack);
-
+/* ZACHARY: Here is where the decisions to make ASCII text from either a video, picture, or live feed happens.*/
 	//
 	if(argc == 1)
 		process_video_stream(0);
