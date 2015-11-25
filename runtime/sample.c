@@ -449,20 +449,25 @@ void view_in_ascii(char src[])
 */
 
 static CvCapture* videostream = 0;
-
+/*ZACHARY: This is where the important step of the video stream starts. This method is called very early
+on in the process_video_stream method. It appears as though the input is a character array called avifile.*/
 int initialize_video_stream(char avifile[])
 {
+	/* ZACHARY: It looks like there is a special case for a AVI file. otherwise every other file will
+	use the cvCaptureFromCAM method.*/
 	if(avifile)
 		videostream = cvCaptureFromAVI(avifile);
 	else
 		videostream = cvCaptureFromCAM(0);
-
+	/*ZACHARY: It looks here that if there is nothing associated with the videostream variable which is
+	assigned above this comment, then this method returns a 0 and the overall process_video_stream method
+	will fail as well. */
 	if(!videostream)
 		return 0;
 
 	return 1;
 }
-
+/*ZACHARY: It just looks like this is a way to cancel the videostream. */
 void uninitialize_video_stream()
 {
 	cvReleaseCapture(&videostream);
@@ -500,7 +505,7 @@ uint8_t* get_frame_from_video_stream(int* nrows, int* ncols, int* ldim)
 	
 	return (uint8_t*)gray->imageData;
 }
-
+/*ZACHARY: It appears that this is where the code for the video stream starts. */
 int process_video_stream(char avifile[])
 {
 	int stop;
@@ -509,7 +514,8 @@ int process_video_stream(char avifile[])
 	int nrows, ncols, ldim;
 
 	int useclahe;
-
+/*ZACHARY: It looks like here this is a crucial step in the video stream process. If this "initialize_video_stream"
+step can't be done, then the program crashes. */
 	//
 	if(!initialize_video_stream(avifile))
 	{
