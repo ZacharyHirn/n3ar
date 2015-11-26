@@ -528,7 +528,7 @@ step can't be done, then the program crashes. */
 	useclahe = 0;
 
 	stop = 0;
-
+/*ZACHARY: Here is a while loop, but I am not sure what it does yet. */
 	while(!stop)
 	{
 		int key = 0;
@@ -538,7 +538,7 @@ step can't be done, then the program crashes. */
 
 		//
 		frame = get_frame_from_video_stream(&nrows, &ncols, &ldim);
-
+/*ZACHARY: Not sure what the significance of key == 't' is. */
 		if(key == 't')
 			useclahe = ~useclahe;
 
@@ -547,6 +547,9 @@ step can't be done, then the program crashes. */
 			stop = 1;
 		else if(!frame)
 			return 0;
+/*ZACHARY: Inside this else statement is a method called transform_to_ascii,
+which is most likely very important. But I do not know what this else statement
+does.*/
 		else
 		{
 			if(useclahe)
