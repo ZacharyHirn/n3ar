@@ -535,7 +535,10 @@ step can't be done, then the program crashes. */
 
 		// get the pressed key ...
 		key = cvWaitKey(1);
-
+/*ZACHARY: Looks like this get_frame_from_video_stream method is commented out, so not sure we need to know
+anything about this. However, if this code isn't actually commented out it looks as though this will get
+a picture from the current frame of a video. Perhaps this is how the program converts streams to ASCII
+text, by taking pictures and converting every picture.*/
 		//
 		frame = get_frame_from_video_stream(&nrows, &ncols, &ldim);
 /*ZACHARY: Not sure what the significance of key == 't' is. */
@@ -560,7 +563,8 @@ does.*/
 			display_image(frame, nrows, ncols, ldim);
 		}
 	}
-
+/*ZACHARY: It says this code is commented out for me, but if it isn't it sounds like all it does is stop the
+video stream and then ends the program, I think.*/
 	//
 	uninitialize_video_stream();
 
