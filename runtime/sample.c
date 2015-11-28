@@ -472,21 +472,21 @@ void uninitialize_video_stream()
 {
 	cvReleaseCapture(&videostream);
 }
-
+/*ZACHARY: Title seems pretty explainatory.*/
 uint8_t* get_frame_from_video_stream(int* nrows, int* ncols, int* ldim)
 {
 	static IplImage* gray = 0;
 	
 	IplImage* frame;
-	
+/*ZACHARY: This seems important. If this videostream variable doesn't work, then the whole thing crashes.*/	
 	//
 	if(!videostream)
 		return 0;
-
+/*ZACHARY: Looks like this is the code that retrieves a single frame.*/
 	// get the frame
 	cvGrabFrame(videostream);
 	frame = cvRetrieveFrame(videostream, CV_LOAD_IMAGE_GRAYSCALE);
-	
+/*ZACHARY: If there is no frame, the whole thing crashes.*/	
 	if(!frame)
 		return 0;
 	
@@ -497,7 +497,8 @@ uint8_t* get_frame_from_video_stream(int* nrows, int* ncols, int* ldim)
 	cvCvtColor(frame, gray, CV_RGB2GRAY);
 
 	//cvFlip(gray, gray, 1);
-	
+/*ZACHARY: It looks like here we gather the number of rows, number of columns, and something with dimensions from
+the frame we have extracted.*/
 	// extract relevant data
 	*nrows = gray->height;
 	*ncols = gray->width;
