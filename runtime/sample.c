@@ -23,7 +23,7 @@ int32_t* tree = 0;
 /*
 	
 */
-
+/*ZACHARY: This method is only ever called inside the CLAHE method.*/
 void RCLAHEM(uint8_t imap[], uint8_t img[], int i0, int j0, int i1, int j1, int ldim, uint8_t s)
 {
 	//
@@ -80,9 +80,14 @@ void RCLAHEM(uint8_t imap[], uint8_t img[], int i0, int j0, int i1, int j1, int 
 	for(k=0; k<NBINS; ++k)
 		imap[k] = (NBINS-1)*P[k];
 }
-
+/*ZACHARY: This method is called in the process_image and view_in_ascii methods. It looks like this imaps
+variable is a 3 dimensional array which is 16 x 16 x NBINS big. This may be possibly the size of each box used
+by the program to determine which ascii character to represent the pixels.*/
 void CLAHE(uint8_t out[], uint8_t in[], int nrows, int ncols, int ldim, int di, int dj, uint8_t s)
-{	
+{
+	/*ZACHARY: I am unfortunately a bit confused as to why the third variable in this 3 dimensional array is
+	NBINS, as this value is only defined inside the RCLAHEM method and no where else. that method is only
+	called from inside this method, so doesn't that mean NBINS won't have a value at this point?*/
 	//
 	#define MAXDIVS 16
 	uint8_t imaps[MAXDIVS][MAXDIVS][NBINS];
