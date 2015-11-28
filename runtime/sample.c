@@ -213,7 +213,7 @@ void CLAHE(uint8_t out[], uint8_t in[], int nrows, int ncols, int ldim, int di, 
 /*
 	
 */
-
+/*ZACHARY: I'm not sure what the index matrix is, but this is where it gets computed.*/
 void compute_index_matrix(uint8_t indexmatrix[], uint8_t pixels[], int nrows, int ncols, int ldim)
 {
 	int i;
@@ -222,7 +222,7 @@ void compute_index_matrix(uint8_t indexmatrix[], uint8_t pixels[], int nrows, in
 
 	//
 	i = 0;
-
+/*ZACHARY: This double for loop might have to do with deciding which ASCII character gets printed.*/
 	for(r=0; r<nrows; r+=glyphnrows)
 	{
 		for(c=0; c<ncols; c+=glyphncols)
@@ -238,9 +238,10 @@ void compute_index_matrix(uint8_t indexmatrix[], uint8_t pixels[], int nrows, in
 		}
 	}
 }
-
+/*ZACHARY: The title appears to reveal that this is where the magic happens.*/
 void transform_to_ascii(uint8_t pixels[], int* nrows, int* ncols, int ldim)
 {
+/*ZACHARY: It looks like the picture will be a 640x480 matrix.*/
 	static uint8_t indexmatrix[640*480];
 
 	int r, c;
@@ -256,7 +257,10 @@ void transform_to_ascii(uint8_t pixels[], int* nrows, int* ncols, int ldim)
 
 	//
 	n = 0;
-
+/*ZACHARY: I unfortunately do not understand anything happening in this double for loop. It looks like glyph is an 
+unsigned 8 bit integer which gets a value from this &glyphs two dimensional array, which is dependent on the
+idx variable and 0. This idx variable seems to get a value from this indexmatrix array, or this might be
+a method which creates an n x n matrix.*/
 	for(r=0; r<*nrows; r+=glyphnrows)
 		for(c=0; c<*ncols; c+=glyphncols)
 		{
@@ -280,7 +284,7 @@ void transform_to_ascii(uint8_t pixels[], int* nrows, int* ncols, int ldim)
 /*
 	
 */
-
+/*ZACHARY: Title seems to describe what happens.*/
 void display_image(uint8_t pixels[], int nrows, int ncols, int ldim)
 {
 	IplImage* header;
